@@ -2,48 +2,62 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
 
-    <title> alight test </title>
+  <title> alight test </title>
 
-    <script src="static/jquery-2.2.4.js"> </script>
-    <script type="text/javascript" src='static/alight.js'></script>
-    <link rel="stylesheet" href="static/style.css">
+  <script src="static/jquery-2.2.4.js"> </script>
+  <script type="text/javascript" src='static/alight.js'></script>
+  <link rel="stylesheet" href="static/style.css">
 </head>
 
 
 <body al-app="main_app" class="container">
-    <div class="block">
-        <h4>Items</h4>
-        <table>
-            <tr>
-                <th>id</th>
-                <th>title</th>
-                <th>price</th>
-                <th>amount</th>
-                <th>category</th>
-                <th>arrival</th>
-                <th>validity</th>
-                <th>manufacturer</th>
-            </tr>
+  <div class="block list">
+    <h4>Items</h4>
 
-            <tr al-repeat="it in items">
-                <td>{{ it.id }}</td>
-                <td>{{ it.title }}</td>
-                <td>{{ it.price }}</td>
-                <td>{{ it.amount }}</td>
-                <td>{{ it.category }}</td>
-                <td>{{ it.arrival }}</td>
-                <td>{{ it.validity }}</td>
-                <td>{{ it.manufacturer }}</td>
-            </tr>
-        </table>
+    <div class="filter">
+      <input type="text" al-value="_title">
+
+      Currency: 
+      <label><input name="_currency" type="radio" value="dollar">Dollar</label>
+      <label><input name="currency" type="radio" value="euro">Euro</label>
+      <label><input name="currency" type="radio" value="euro">Rub</label>
+      
+      Price:
+      <input type="number" style="width: 50px;" placeholder="Min" al-value="_price_min">
+      -
+      <input type="number" style="width: 50px;" placeholder="Max" al-value="_price_max">
     </div>
 
-    <div class="block">
-        <h4>Item info</h4>
-        todo this
+    <div class="container">
+
+      <div
+        al-repeat="it in items | filter:_title"
+        class="block"
+      >
+        <h4>{{ it.title }}</h4>
+        <button al-click="selectItem(it)">Select</button>
+      </div>
+
     </div>
+
+    </table>
+  </div>
+
+  <div class="block item">
+    <h4>Item info</h4>
+    <table style="width: 100%;">
+      
+      <tr al-repeat="(k, v) in selected">
+        <td>{{ k }}</td>
+        <td>{{ v }}</td>
+      </tr>
+
+    </table>
+    <button>Accept</button>
+    <button>Cansel</button>
+  </div>
 </body>
 <script type="text/javascript" src='static/al-test.js'></script>
 

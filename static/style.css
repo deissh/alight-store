@@ -1,24 +1,43 @@
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
 }
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+  background-color: #dddddd;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 10px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
 }
 
 .block {
-    text-align: center;
+  text-align: center;
+}
+
+.block.item {
+  grid-column: 3 ;
+}
+
+.block.list {
+  grid-column: 1 / 3;
+}
+
+.block.list .block {
+  border: 1px;
+  /* border-color: black; */
+}
+
+.block.list .filter {
+  /* padding: 5px; */
+  /* margin: 10px; */
 }

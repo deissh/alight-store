@@ -17,23 +17,25 @@
     <h4>Items</h4>
 
     <div class="filter">
-      <input type="text" al-value="_title">
+      <input type="text" al-value="title">
 
-      Currency: 
-      <label><input name="_currency" type="radio" value="dollar">Dollar</label>
-      <label><input name="currency" type="radio" value="euro">Euro</label>
-      <label><input name="currency" type="radio" value="euro">Rub</label>
-      
+      Currency:
+      <select>
+        <option value="1">Dollar</option>
+        <option value="2">Euro</option>
+        <option selected value="3">Rub</option>
+      </select>
+
       Price:
-      <input type="number" style="width: 50px;" placeholder="Min" al-value="_price_min">
+      <input type="number" style="width: 50px;" placeholder="Min" al-value="pricemin">
       -
-      <input type="number" style="width: 50px;" placeholder="Max" al-value="_price_max">
+      <input type="number" style="width: 50px;" placeholder="Max" al-value="pricemax">
     </div>
 
     <div class="container">
 
       <div
-        al-repeat="it in items | filter:_title"
+        al-repeat="it in items | filter:title"
         class="block"
       >
         <h4>{{ it.title }}</h4>
@@ -56,7 +58,7 @@
 
     </table>
     <button>Accept</button>
-    <button>Cansel</button>
+    <button>Dismis</button>
   </div>
 </body>
 <script type="text/javascript" src='static/al-test.js'></script>

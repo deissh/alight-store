@@ -34,10 +34,7 @@
 
     <div class="container">
 
-      <div
-        al-repeat="it in items | filter:title"
-        class="block"
-      >
+      <div al-repeat="it in items | filter:title" class="block">
         <h4>{{ it.title }}</h4>
         <button al-click="selectItem(it)">Select</button>
       </div>
@@ -47,18 +44,65 @@
     </table>
   </div>
 
-  <div class="block item">
+  <div class="block item" al-if="selected">
     <h4>Item info</h4>
     <table style="width: 100%;">
-      
-      <tr al-repeat="(k, v) in selected">
-        <td>{{ k }}</td>
-        <td>{{ v }}</td>
+
+      <tr>
+        <td>id</td>
+        <td>selected.id</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>
+          <input type="text" al-value="selected.title">
+        </td>
+      </tr>
+      <tr>
+        <td>price</td>
+        <td>
+          <input type="text" al-value="selected.price">
+        </td>
+      </tr>
+      <tr>
+        <td>amount</td>
+        <td>
+          <input type="text" al-value="selected.amount">
+        </td>
+      </tr>
+      <tr>
+        <td>category</td>
+        <td>
+          <input type="text" al-value="selected.category">
+        </td>
+      </tr>
+      <tr>
+        <td>arrival</td>
+        <td>
+          <input type="date" al-value="selected.arrival">
+        </td>
+      </tr>
+      <tr>
+        <td>validity</td>
+        <td>
+          <input type="date" al-value="selected.validity">
+        </td>
+      </tr>
+      <tr>
+        <td>manufacturer</td>
+        <td>
+          <input type="text" al-value="selected.manufacturer">
+        </td>
       </tr>
 
+      <!--<tr al-repeat="(k, v) in selected">
+        <td>{{ k }}</td>
+        <td>{{ v }}</td>
+      </tr>-->
+
     </table>
-    <button>Accept</button>
-    <button>Dismis</button>
+    <button al-click="accept();">Accept</button>
+    <button al-click="dismis();">Dismis</button>
   </div>
 </body>
 <script type="text/javascript" src='static/al-test.js'></script>

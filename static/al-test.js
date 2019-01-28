@@ -5,19 +5,16 @@ $(document).ready(() => {
 
   alight.controllers.main_app = (scope) => {
     scope.selected;
-    scope.filterparam = {
-      title: null,
-      currency: {
-        dollar: false,
-        euro: false,
-        rub: true
-      },
-      price_min: 1,
-      price_max: 999
-    };
+
     scope.pricemin = 1;
     scope.pricemax = 999;
     scope.title = null;
+    /*
+      1 - rub
+      2 - dollar
+      3 - euro
+    */
+    scope.currency = 1;
 
     scope.items = [
       {
@@ -101,6 +98,22 @@ $(document).ready(() => {
       console.log(it);
       scope.selected = it;
     };
+    //todo: fix errors
+    scope.accept = () => {
+      console.log(scope.selected);
+      for (let i = 0; i < scope.items.length; i++) {
+        if (scope.items[i].id === selected.id) {
+          scope.items[i] = scope.selected;
+        }
+      }
+    }
+    scope.dismis = () => {
+      for (let i = 0; i < scope.items.length; i++) {
+        if (scope.items[i].id === selected.id) {
+          scope.selected = scope.items[i];
+        }
+      }
+    }
   };
 
   alight.filters.price = (exp, scope) => {

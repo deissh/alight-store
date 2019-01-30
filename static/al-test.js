@@ -4,18 +4,44 @@ $(document).ready(() => {
   console.log("run.");
 
   alight.controllers.main_app = (scope) => {
+    /**
+     * @description selected item
+     */
     scope.selected;
-
+    /**
+     * @description contain search result
+     */
+    scope.result = [];
+    /**
+     * @namespace filter
+     * @description filter, minimal price
+     * @type {number}
+     */
     scope.pricemin = 1;
+    /**
+     * @namespace filter
+     * @description filter, maximum price
+     * @type {number}
+     */
     scope.pricemax = 999;
+    /**
+     * @namespace filter
+     * @description item title
+     * @type {string}
+     */
     scope.title = null;
-    /*
-      1 - rub
-      2 - dollar
-      3 - euro
-    */
+    /**
+     * @description current currency
+     * @type {number}
+     * 1 - rub
+     * 2 - dollar
+     * 3 - euro
+     */
     scope.currency = 1;
 
+    /**
+     * @description contain all items
+     */
     scope.items = [
       {
         "id": 0,
@@ -23,8 +49,8 @@ $(document).ready(() => {
         "price": 333,
         "amount": 12,
         "category": "Еда",
-        "arrival": "2016-07-23T11:21:14 -03:00",
-        "validity": "2016-09-11T07:22:33 -03:00",
+        "arrival": "2016-07-23",
+        "validity": "2016-09-11",
         "manufacturer": 1
       },
       {
@@ -33,8 +59,8 @@ $(document).ready(() => {
         "price": 150,
         "amount": 10,
         "category": "Игрушка",
-        "arrival": "2018-03-28T07:47:07 -03:00",
-        "validity": "2017-03-16T08:05:17 -03:00",
+        "arrival": "2018-03-28",
+        "validity": "2017-03-16",
         "manufacturer": 1
       },
       {
@@ -43,8 +69,8 @@ $(document).ready(() => {
         "price": 153,
         "amount": 21,
         "category": "Еда",
-        "arrival": "2015-08-11T08:35:02 -03:00",
-        "validity": "2017-02-21T04:14:05 -03:00",
+        "arrival": "2015-08-11",
+        "validity": "2017-02-21",
         "manufacturer": 1
       },
       {
@@ -53,8 +79,8 @@ $(document).ready(() => {
         "price": 286,
         "amount": 38,
         "category": "Игрушка",
-        "arrival": "2018-11-09T05:39:00 -03:00",
-        "validity": "2017-09-21T05:23:55 -03:00",
+        "arrival": "2018-11-09",
+        "validity": "2017-09-21",
         "manufacturer": 1
       },
       {
@@ -63,8 +89,8 @@ $(document).ready(() => {
         "price": 149,
         "amount": 21,
         "category": "Еда",
-        "arrival": "2017-09-25T04:36:01 -03:00",
-        "validity": "2017-05-16T08:25:58 -03:00",
+        "arrival": "2017-09-25",
+        "validity": "2017-05-16",
         "manufacturer": 1
       },
       {
@@ -73,8 +99,8 @@ $(document).ready(() => {
         "price": 167,
         "amount": 30,
         "category": "Игрушка",
-        "arrival": "2018-01-04T10:18:46 -03:00",
-        "validity": "2017-04-18T05:34:21 -03:00",
+        "arrival": "2018-01-04",
+        "validity": "2017-04-18",
         "manufacturer": 1
       }
     ];
@@ -93,51 +119,61 @@ $(document).ready(() => {
       },
     };
 
+    /**
+     * @namespace viewer
+     * @description set item preview
+     */
     scope.selectItem = (it) => {
-      // todo: delete this
-      console.log(it);
-      scope.selected = it;
+      // disable all watchers
+      // todo: rewrite
+      scope.selected = { ...it };
     };
-    //todo: fix errors
+    /**
+     * @namespace viewer
+     * @description aceept changes in preview panel
+     */
     scope.accept = () => {
-      console.log(scope.selected);
       for (let i = 0; i < scope.items.length; i++) {
-        if (scope.items[i].id === selected.id) {
+        if (scope.items[i].id === scope.selected.id) {
           scope.items[i] = scope.selected;
         }
       }
     }
+    /**
+     * @namespace viewer
+     * @description discard all changes and set current values
+     */
     scope.dismis = () => {
       for (let i = 0; i < scope.items.length; i++) {
-        if (scope.items[i].id === selected.id) {
+        if (scope.items[i].id === scope.selected.id) {
           scope.selected = scope.items[i];
         }
       }
     }
   };
 
-  alight.filters.price = (exp, scope) => {
-    const ce = scope.$compile(exp);
+  // alight.filters.price = (exp, scope) => {
+  //   const ce = scope.$compile(exp);
 
-    return (value) => {
-      const result = [];
-      console.log(ce());
+  //   return (value) => {
+  //     const result = [];
+  //     console.log(ce());
       
-      value.forEach((item) => {
-        if (
-          ce().price_min &&
-          ce().price_max &&
-          !ce() >= item.price <= ce().price_max
-        ) {
-          return;
-        }
+  //     value.forEach((item) => {
+  //       if (
+  //         ce().price_min &&
+  //         ce().price_max &&
+  //         !ce() >= item.price <= ce().price_max
+  //       ) {
+  //         return;
+  //       }
 
-        result.push(item);
-      });
+  //       result.push(item);
+  //     });
 
-      console.log(result);
+  //     console.log(result);
       
-      return result;
-    };
-  };
+  //     return result;
+  //   };
+  // };
 });

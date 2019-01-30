@@ -123,7 +123,7 @@ $(document).ready(() => {
      * @namespace viewer
      * @description set item preview
      */
-    scope.selectItem = (it) => {
+    scope.SelectItem = (it) => {
       // disable all watchers
       // todo: rewrite
       scope.selected = { ...it };
@@ -132,7 +132,7 @@ $(document).ready(() => {
      * @namespace viewer
      * @description aceept changes in preview panel
      */
-    scope.accept = () => {
+    scope.Accept = () => {
       for (let i = 0; i < scope.items.length; i++) {
         if (scope.items[i].id === scope.selected.id) {
           scope.items[i] = scope.selected;
@@ -143,37 +143,44 @@ $(document).ready(() => {
      * @namespace viewer
      * @description discard all changes and set current values
      */
-    scope.dismis = () => {
+    scope.Dismis = () => {
       for (let i = 0; i < scope.items.length; i++) {
         if (scope.items[i].id === scope.selected.id) {
           scope.selected = scope.items[i];
         }
       }
     }
+
+    /**
+     * @namespace filter
+     * @description start search
+     */
+    scope.Search = () => {
+      scope.result = [];
+
+      scope.items.forEach((item) => {
+        if ((parseInt(scope.pricemin) > item.price || parseInt(scope.pricemax) < item.price)) {
+          return;
+        }
+
+        scope.result.push(item);
+      });
+    };
+
+    /**
+     * @namespace filter
+     * @description clear all filters and result
+     */
+    scope.Clear = () => {
+      scope.pricemin = 1;
+      scope.pricemax = 999;
+      scope.title = null;
+
+      scope.result = scope.items;
+    };
+
+
+    // triger search with default values
+    scope.Search();
   };
-
-  // alight.filters.price = (exp, scope) => {
-  //   const ce = scope.$compile(exp);
-
-  //   return (value) => {
-  //     const result = [];
-  //     console.log(ce());
-      
-  //     value.forEach((item) => {
-  //       if (
-  //         ce().price_min &&
-  //         ce().price_max &&
-  //         !ce() >= item.price <= ce().price_max
-  //       ) {
-  //         return;
-  //       }
-
-  //       result.push(item);
-  //     });
-
-  //     console.log(result);
-      
-  //     return result;
-  //   };
-  // };
 });

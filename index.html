@@ -31,17 +31,17 @@
       -
       <input type="number" style="width: 50px;" placeholder="Max" al-value="pricemax">
 
-      <button>
+      <button al-click="Search()">
           Search
       </button>
-      <button>X</button>
+      <button al-click="Clear()">X</button>
     </div>
 
     <div class="container">
 
-      <div al-repeat="it in items | filter:title" class="block">
+      <div al-repeat="it in result | filter:title" class="block">
         <h4>{{ it.title }}</h4>
-        <button al-click="selectItem(it)">Select</button>
+        <button al-click="SelectItem(it)">Select</button>
       </div>
 
     </div>
@@ -99,10 +99,10 @@
           <input type="text" al-value="selected.manufacturer">
         </td>
       </tr>
-      
+
     </table>
-    <button al-click="accept();">Accept</button>
-    <button al-click="dismis();">Dismis</button>
+    <button al-click="Accept()">Accept</button>
+    <button al-click="Dismis()">Dismis</button>
   </div>
 </body>
 <script type="text/javascript" src='static/al-test.js'></script>

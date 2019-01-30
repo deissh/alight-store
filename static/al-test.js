@@ -1,5 +1,7 @@
 "use strict";
 
+let global = {};
+
 $(document).ready(() => {
   console.log("run.");
 
@@ -42,8 +44,7 @@ $(document).ready(() => {
     /**
      * @description contain all items
      */
-    scope.items = [
-      {
+    scope.items = [{
         "id": 0,
         "title": "non",
         "price": 333,
@@ -182,5 +183,19 @@ $(document).ready(() => {
 
     // triger search with default values
     scope.Search();
+    global = scope;
+  };
+
+  //todo: исправить то что текущий скоп перекрывает другие у дириктивы
+  alight.directives.al.datePicker = {
+    template: '<input type="date" al-value="date">',
+    scope: true,
+    init: function (el, name, scope, env) {
+      const setter = function(value) {
+        console.log(value);
+        scope.date = value;
+      };
+      setter(scope.$watch(name, setter).value);
+    }
   };
 });

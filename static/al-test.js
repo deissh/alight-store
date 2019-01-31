@@ -131,6 +131,7 @@ $(document).ready(() => {
       // disable all watchers
       // todo: rewrite
       scope.selected = { ...scope.items[id] };
+      scope.selected.price = scope.items.find((v) => v.id === id).price * scope.currency;
     };
     /**
      * @namespace viewer
@@ -139,7 +140,10 @@ $(document).ready(() => {
     scope.Accept = () => {
       for (let i = 0; i < scope.items.length; i++) {
         if (scope.items[i].id === scope.selected.id) {
-          scope.items[i] = { ...scope.selected };
+          scope.items[i] = { 
+            ...scope.selected,
+            price: scope.items.find((v) => v.id === scope.selected.id).price / (1 - scope.currency)
+          };
         }
       }
     }

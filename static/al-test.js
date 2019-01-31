@@ -36,8 +36,8 @@ $(document).ready(() => {
      * @description current currency
      * @type {number}
      * 1 - rub
-     * 2 - dollar
-     * 3 - euro
+     * 60 - dollar
+     * 70 - euro
      */
     scope.currency = 1;
 
@@ -130,7 +130,7 @@ $(document).ready(() => {
     scope.SelectItem = (id) => {
       // disable all watchers
       // todo: rewrite
-      scope.selected = scope.items[id];
+      scope.selected = { ...scope.items[id] };
     };
     /**
      * @namespace viewer
@@ -182,6 +182,10 @@ $(document).ready(() => {
 
       scope.result = scope.items;
     };
+
+    scope.$watch('currency', () => {
+      scope.selected.price = scope.items.find((v) => v.id === scope.selected.id).price * scope.currency;
+    });
 
     // todo: обвернуть внутрь scope или придумать более красивый способ
     evt.on('update', ({ value, key }) => {

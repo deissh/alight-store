@@ -41,7 +41,7 @@
 
       <div al-repeat="it in result | filter:title" class="block">
         <h4>{{ it.title }}</h4>
-        <button al-click="SelectItem(it)">Select</button>
+        <button al-click="SelectItem(it.id)">Select</button>
       </div>
 
     </div>
@@ -55,7 +55,7 @@
 
       <tr>
         <td>id</td>
-        <td>{{=selected.id}}</td>
+        <td>{{selected.id}}</td>
       </tr>
       <tr>
         <td>title</td>
@@ -83,13 +83,11 @@
       </tr>
       <tr>
         <td>arrival</td>
-        <td>
-            <input type="date" al-value="selected.arrival">
-        </td>
+        <td al-date-picker="selected.arrival*arrival"></td>
       </tr>
       <tr>
         <td>validity</td>
-        <td al-date-picker="selected.validity"></td>
+        <td al-date-picker="selected.validity*validity"></td>
       </tr>
       <tr>
         <td>manufacturer</td>
@@ -102,6 +100,53 @@
     <button al-click="Accept()">Accept</button>
     <button al-click="Dismis()">Dismis</button>
   </div>
+
+  <!--<div class="block new">
+      <h4>New Item</h4>
+      <table style="width: 100%;">
+
+        <tr>
+          <td>title</td>
+          <td>
+            <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td>price</td>
+          <td>
+            <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td>amount</td>
+          <td>
+            <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td>category</td>
+          <td>
+            <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td>arrival</td>
+          <td al-date-picker="selected.arrival"></td>
+        </tr>
+        <tr>
+          <td>validity</td>
+          <td al-date-picker="selected.validity"></td>
+        </tr>
+        <tr>
+          <td>manufacturer</td>
+          <td>
+            <input type="text" al-value="selected.manufacturer">
+          </td>
+        </tr>
+  
+      </table>
+      <button al-click="Create()">Create</button>
+  </div>-->
 </body>
 <script type="text/javascript" src='static/al-test.js'></script>
 

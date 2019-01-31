@@ -124,10 +124,11 @@ $(document).ready(() => {
      * @namespace viewer
      * @description set item preview
      */
-    scope.SelectItem = (it) => {
+    scope.SelectItem = (id) => {
       // disable all watchers
       // todo: rewrite
-      scope.selected = { ...it };
+      scope.selected = scope.items[id];
+      console.log(scope.items[id]);
     };
     /**
      * @namespace viewer
@@ -136,7 +137,7 @@ $(document).ready(() => {
     scope.Accept = () => {
       for (let i = 0; i < scope.items.length; i++) {
         if (scope.items[i].id === scope.selected.id) {
-          scope.items[i] = scope.selected;
+          scope.items[i] = { ...scope.selected };
         }
       }
     }
@@ -180,6 +181,10 @@ $(document).ready(() => {
       scope.result = scope.items;
     };
 
+    // todo: обвернуть внутрь scope или придумать более красивый способ
+    evt.on('update', ({ value, key }) => {
+      scope.$setValue(key, value)
+    });
 
     // triger search with default values
     scope.Search();
@@ -187,15 +192,45 @@ $(document).ready(() => {
   };
 
   //todo: исправить то что текущий скоп перекрывает другие у дириктивы
+  // '<input type="date" al-value="s.data">'
   alight.directives.al.datePicker = {
-    template: '<input type="date" al-value="date">',
-    scope: true,
-    init: function (el, name, scope, env) {
-      const setter = function(value) {
-        console.log(value);
-        scope.date = value;
+    init: (el, name, scope) => {
+      const arg = name.split('*');
+      const s = {
+        event: arg[1],
+        name: arg[0],
+        input: null,
+        template: function () {
+          return `<input type="date" value="${this.date}">`
+        },
+        setter: function () {
+          // для сохранения текущего this
+          return (value) => $(this.input).val(value);
+        },
+        init: function () {
+          this.date = scope.$watch(arg[0], this.setter()).value;
+
+          this.input = $(this.template());
+          this.input.change((e) => evt.emit('update', { value: e.target.value, key: this.name }));
+          $(el).append(this.input);
+        }
       };
-      setter(scope.$watch(name, setter).value);
+
+      s.init();
     }
-  };
+  }
 });
+
+const evt = {
+  _cb: [],
+  on: function (name, cb) {
+    this._cb.push({ name, cb })
+  },
+  emit: function(name, data) {
+    this._cb.forEach((fn) => {
+      if (fn.name === name) {
+        fn.cb(data);
+      }
+    });
+  }
+}

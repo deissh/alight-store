@@ -128,7 +128,6 @@ $(document).ready(() => {
       // disable all watchers
       // todo: rewrite
       scope.selected = scope.items[id];
-      console.log(scope.items[id]);
     };
     /**
      * @namespace viewer
@@ -200,8 +199,9 @@ $(document).ready(() => {
         event: arg[1],
         name: arg[0],
         input: null,
-        template: function () {
-          return `<input type="date" value="${this.date}">`
+        date: null,
+        template: function (value) {
+          return `<input type="date" value="${value}">`
         },
         setter: function () {
           // для сохранения текущего this
@@ -210,7 +210,7 @@ $(document).ready(() => {
         init: function () {
           this.date = scope.$watch(arg[0], this.setter()).value;
 
-          this.input = $(this.template());
+          this.input = $(this.template(this.date));
           this.input.change((e) => evt.emit('update', { value: e.target.value, key: this.name }));
           $(el).append(this.input);
         }

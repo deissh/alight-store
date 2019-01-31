@@ -52,7 +52,7 @@ $(document).ready(() => {
         "category": "Еда",
         "arrival": "2016-07-23",
         "validity": "2016-09-11",
-        "manufacturer": 1
+        "manufacturer": 3
       },
       {
         "id": 1,
@@ -62,7 +62,7 @@ $(document).ready(() => {
         "category": "Игрушка",
         "arrival": "2018-03-28",
         "validity": "2017-03-16",
-        "manufacturer": 1
+        "manufacturer": 2
       },
       {
         "id": 2,
@@ -72,7 +72,7 @@ $(document).ready(() => {
         "category": "Еда",
         "arrival": "2015-08-11",
         "validity": "2017-02-21",
-        "manufacturer": 1
+        "manufacturer": 2
       },
       {
         "id": 3,
@@ -82,7 +82,7 @@ $(document).ready(() => {
         "category": "Игрушка",
         "arrival": "2018-11-09",
         "validity": "2017-09-21",
-        "manufacturer": 1
+        "manufacturer": 3
       },
       {
         "id": 4,
@@ -105,20 +105,23 @@ $(document).ready(() => {
         "manufacturer": 1
       }
     ];
-    scope.manufacturer = {
-      2: {
+    scope.manufacturer = [
+      {
+        id: 2,
         name: 'Some name 2',
         desc: 'some very short description',
       },
-      1: {
+      {
+        id: 1,
         name: 'Some name 1',
         desc: 'some very short description',
       },
-      3: {
+      {
+        id: 3,
         name: 'Some name 3',
         desc: 'some very short description',
-      },
-    };
+      }
+    ];
 
     /**
      * @namespace viewer

@@ -92,7 +92,10 @@
       <tr>
         <td>manufacturer</td>
         <td>
-          <input type="text" al-value="selected.manufacturer">
+          <!--<input type="text" al-value="selected.manufacturer">-->
+          <select al-value="selected.manufacturer">
+            <option value="{{ it.id }}" al-repeat="it in manufacturer">{{ it.name }}</option>
+          </select>
         </td>
       </tr>
 

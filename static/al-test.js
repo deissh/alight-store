@@ -11,6 +11,18 @@ $(document).ready(() => {
      */
     scope.selected;
     /**
+     * @description containt new item default velues
+     */
+    scope.new = {
+      title: '',
+      price: 0,
+      amount: 0,
+      category: '',
+      arrival: '',
+      validity: '',
+      manufacturer: 1
+    };
+    /**
      * @description contain search result
      */
     scope.result = [];
@@ -187,13 +199,25 @@ $(document).ready(() => {
       scope.result = scope.items;
     };
 
+    /**
+     * @namespace viewer
+     * @description discard all changes and set current values
+     */
+    scope.Create = () => {
+      scope.items.push({
+        id: scope.items.length,
+        ...scope.new
+      });
+      scope.Clear();
+    }
+    
     scope.$watch('currency', () => {
       scope.selected.price = scope.items.find((v) => v.id === scope.selected.id).price * scope.currency;
     });
 
     // todo: обвернуть внутрь scope или придумать более красивый способ
     evt.on('update', ({ value, key }) => {
-      scope.$setValue(key, value)
+      scope.$setValue(key, value);
     });
 
     // triger search with default values

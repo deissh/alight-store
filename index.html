@@ -50,7 +50,9 @@
   </div>
 
   <div class="block item" al-if="selected">
-    <h4>Item info</h4>
+    <h4>
+      Item info
+    </h4>
     <table style="width: 100%;">
 
       <tr>
@@ -104,52 +106,54 @@
     <button al-click="Dismis()">Dismis</button>
   </div>
 
-  <!--<div class="block new">
+  <div class="block new">
       <h4>New Item</h4>
       <table style="width: 100%;">
 
         <tr>
           <td>title</td>
           <td>
-            <input type="text">
+            <input al-value="new.title" type="text">
           </td>
         </tr>
         <tr>
           <td>price</td>
           <td>
-            <input type="text">
+            <input al-value="new.price" type="number">
           </td>
         </tr>
         <tr>
           <td>amount</td>
           <td>
-            <input type="text">
+            <input al-value="new.amount" type="number">
           </td>
         </tr>
         <tr>
           <td>category</td>
           <td>
-            <input type="text">
+            <input al-value="new.category" type="text">
           </td>
         </tr>
         <tr>
           <td>arrival</td>
-          <td al-date-picker="selected.arrival"></td>
+          <td al-date-picker="new.arrival"></td>
         </tr>
         <tr>
           <td>validity</td>
-          <td al-date-picker="selected.validity"></td>
+          <td al-date-picker="new.validity"></td>
         </tr>
         <tr>
           <td>manufacturer</td>
           <td>
-            <input type="text" al-value="selected.manufacturer">
+            <select al-value="selected.manufacturer">
+              <option value="{{ it.id }}" al-repeat="it in manufacturer">{{ it.name }}</option>
+            </select>
           </td>
         </tr>
   
       </table>
       <button al-click="Create()">Create</button>
-  </div>-->
+  </div>
 </body>
 <script type="text/javascript" src='static/al-test.js'></script>
 
